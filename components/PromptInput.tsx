@@ -1,6 +1,6 @@
 "use client";
 
-import fetchSuggestionFromChatGPT from "@/lib/fetchSuggestionFromChatGPT";
+import fetchSuggestionFromChatGPT from "../lib/fetchSuggestionFromChatGPT";
 import { useState } from "react";
 import useSWR from "swr";
 
@@ -22,8 +22,8 @@ const PromptInput = () => {
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          placeholder={suggestion || "Enter a prompt..."}
           className="flex-1 p-4 outline-none rounded-md"
-          placeholder="Enter a prompt..."
         />
         <button
           type="submit"
