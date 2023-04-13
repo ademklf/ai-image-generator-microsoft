@@ -18,7 +18,6 @@ const PromptInput = () => {
 
   const { data, error } = useSWR("/api/data", fetchSuggestionFromChatGPT);
 
-  console.log("data", data);
   console.log(suggestion);
 
   return (
