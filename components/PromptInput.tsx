@@ -1,7 +1,7 @@
 "use client";
 
 import fetchSuggestionFromChatGPT from "../lib/fetchSuggestionFromChatGPT";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import useSWR from "swr";
 
 const PromptInput = () => {
@@ -16,6 +16,19 @@ const PromptInput = () => {
     revalidateOnFocus: false,
   });
 
+  const submitPrompt = async (useSuggestion?: boolean) => {
+    const inputPrompt = input;
+    setInput("");
+
+    const p = useSuggestion ? suggestion : inputPrompt;
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    await submitPrompt();
+  };
+
   const loading = isLoading || isValidating;
 
   // const { data, error } = useSWR("/api/data", fetchSuggestionFromChatGPT);
@@ -24,7 +37,10 @@ const PromptInput = () => {
 
   return (
     <div className="m-10">
-      <form className="flex flex-col lg:flex-row shadow-md shadow-slate-400/10 border rounded-md lg:divide-x">
+      <form
+        onSubmit={(e) => handleSubmit}
+        className="flex flex-col lg:flex-row shadow-md shadow-slate-400/10 border rounded-md lg:divide-x"
+      >
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
